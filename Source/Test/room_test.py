@@ -9,3 +9,7 @@ class Test_room(object):
     def test_room_generation(self):
         room0 = room()
         room0.print()
+
+    def test_room_generation_1(self):
+        room0 = room()
+        room0.print()
