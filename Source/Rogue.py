@@ -2,36 +2,43 @@
 import random
 from Source.Auxillary.undirected_graph import Graph
 from Source.Auxillary.undirected_graph import Vertex
+
 class room:
     def __init__(self):
         self.x = random.randint(10, 15)  # x dimension of the room
         self.y = random.randint(10, 15)  # y dimension of the room
-        nodes = self.x * self.y # save total amount of nodes
-        corners = [0, self.x, self.x * self.y - self.x, self.x * self.y - 1] # saves corners
-        # make a node network to be used for path finding later
         self.map = Graph()  # undirected graph data type for the spaces in the room
+        nodes = self.x * self.y # save total amount of nodes
         for i in range(nodes):  # initializes vertices on the room
             self.map.add_vertex(Vertex(i))
 
         # connects first and last row nodes
-        a = 0
-
+        # make a node network to be used for path finding later
+        a = nodes - self.x
         while a < nodes - 1:
-            self.map.add_edge(a, a + 1, 1)  # connects nodes within last row
+            self.map.add_edge(a, a + 1, 1)  # connects nodes within row y
             a += 1
-        while a < self.x - 1:
-            self.map.add_edge(a, a + 1, 1)  # connects nodes within first row
+        a = 0
+        while a < self.x:
+            if a < self.x - 1:
+                self.map.add_edge(a, a + 1, 1)  # connects nodes within row 0
             self.map.add_edge(a, a + self.x, 1) # connects this row to the nodes of the next row
             a += 1
-        a = nodes - self.x
+        for j in range(1, self.y - 1): # starting from row 1
+            row = j * self.x
+            for a in range(0, self.x): # connects the nodes within the row, and nodes with the next row
+                if a < self.x - 1:
+                    self.map.add_edge(a + row, a + row + 1, 1)
+                self.map.add_edge(a + row, a + row + self.x, 1)
 
-        # todo: connect nodes within row, starting from row 2
-            # todo: connect row with the next row
+    #  current row:  # - # - # - #
+    #                |   |   |   |
+    #  next row      #   #   #   #
 
-    # todo: return connection list for path finding functions in monster and player character
-    # todo: return room edge check for movement, want to keep characters within bounds of room
+    def get_room_nodes(self):    # return connection list for path finding functions in monster and player character
+        return self.map
+
     # todo: take in positions of characters and print them in their positions
-
     def print(self):
         print("")
         for j in range(self.y):
