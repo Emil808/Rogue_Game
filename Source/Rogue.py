@@ -15,14 +15,18 @@ class room:
 
         # connects first and last row nodes
         a = 0
-        while a < self.x - 1:
-            self.map.add_edge(a, a + 1, 1)  # connects nodes within first row
-            a += 1
-        a = nodes - self.x
+
         while a < nodes - 1:
             self.map.add_edge(a, a + 1, 1)  # connects nodes within last row
             a += 1
-        # todo: connect nodes inbetween
+        while a < self.x - 1:
+            self.map.add_edge(a, a + 1, 1)  # connects nodes within first row
+            self.map.add_edge(a, a + self.x, 1) # connects this row to the nodes of the next row
+            a += 1
+        a = nodes - self.x
+
+        # todo: connect nodes within row, starting from row 2
+            # todo: connect row with the next row
 
     # todo: return connection list for path finding functions in monster and player character
     # todo: return room edge check for movement, want to keep characters within bounds of room
