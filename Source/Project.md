@@ -9,20 +9,29 @@ Goals:
 
 Needed for game:
     
-    map generator
+    map generator (completed: map generation, undirected-connections for the spaces, printing room)
     Characters, position [x][y] 
  	    player, will Die if monster is in same space
  	    monster, monster needs to Pursue player
 
 characters can Move within a map
 
-possible functions
+Possible Featuers
+
+    Map generation (done) 
+    Character generation
     
-    Map generation
-    Move
-    Position
-    Pursue
-    Die
+Character class
+    
+    Generation: randomly places character within limits of the room
+    Move : take command input from keyboard or from a movement queue. validate that commanded
+           move is within the map limits
+           
+    Position : save previous and current position
+    Pursue   : path finding function for monster to player. shortest path function, use Dijstra
+    Die      : if monster and player share same position, player dies
+    
+    child class of Character class
     Player: Move, Die
     Monster: Move, Pursue
 
@@ -33,8 +42,13 @@ player and monster will have positions within it
 at initialization of map, 
       
     monster will use a graph algorithm to find path to player
-	after player move, monster moves
- 	graph algorithm from last player position to update path for monster. 
+
+Monster Pursue Player
+
+	after player move, update path to player 
+	    graph algorithm from last player position to update path for monster. 
+	from movement queue, monster moves
+ 	
 
 Also need to make an automatic player character,
 	
