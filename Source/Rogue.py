@@ -5,8 +5,8 @@ from Source.Auxillary.undirected_graph import Vertex
 
 class room:
     def __init__(self):
-        self.x = random.randint(10, 15)  # x dimension of the room
-        self.y = random.randint(10, 15)  # y dimension of the room
+        self.x = random.randint(10, 20)  # x dimension of the room
+        self.y = random.randint(5, 10)  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
         nodes = self.x * self.y # save total amount of nodes
         for i in range(nodes):  # initializes vertices on the room
