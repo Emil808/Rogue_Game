@@ -46,3 +46,20 @@ class room:
                 print('#', end='')
             print("")
 
+
+class character:
+    # todo: generation, generate random posiiton within room limits
+    # todo: get_position
+    # todo: move
+
+class Hero:
+    # todo: make child of character class
+    # todo: die,
+    # todo: save_last position
+    # todo: get_last position
+
+class Monster:
+    # todo: make child of character class
+    # todo: pursue Hero, initial path finding, use Dijstras
+    # todo: move, take command from movement queue made from path finding
+    # todo: update path, gets last position of hero, from tha position, updates movement queue
