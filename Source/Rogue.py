@@ -48,8 +48,15 @@ class room:
 
 
 class character:
-    # todo: generation, generate random posiiton within room limits
-    # todo: get_position
+
+    def __init__(self, room):
+
+        # generate random position within room limits
+        self.position = [random.randint(0, room.x), random.randint(0, room.y)]   # [x,y]
+
+    def get_position(self):     # returns position
+        return self.position
+
     # todo: move
 
 class Hero:
