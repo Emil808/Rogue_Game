@@ -1,5 +1,6 @@
 
 import random
+import keyboard
 from Source.Auxillary.undirected_graph import Graph
 from Source.Auxillary.undirected_graph import Vertex
 
@@ -38,7 +39,7 @@ class room:
     def get_room_nodes(self):    # return connection list for path finding functions in monster and player character
         return self.map
 
-    # todo: take in positions of characters and print them in their positions
+    # todo: edge case if monster is generated in same position as hero
     def print(self, Hero, Monster):
         hero_position = Hero.get_position()
         monster_position = Monster.get_position()
@@ -51,6 +52,8 @@ class room:
             for i in range(self.x):
                 if [i, j] == hero_position:
                     print('H', end='')
+                elif [i, j] == monster_position:
+                    print('M', end='')
                 else:
                     print(' ', end='')
             print('#', end='')
@@ -66,18 +69,56 @@ class character:
 
         # generate random position within room limits
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
-
+        self.x = room.x
+        self.y = room.y
     def get_position(self):     # returns position
         return self.position
 
-    # todo: move
+
+
 
 
 class Hero(character):
     # child of character class
     def __init__(self, room):
-        character.__init__()
+        character.__init__(self, room)
         self.last_position = self.position
+
+    def move(self):
+        # movement for hero character, need to call room.print to see changes
+        while 1:
+            if keyboard.is_pressed('w'):
+                while keyboard.is_pressed('w'):
+                    n = 1
+                if self.position[1] == 0:
+                    break
+                else:
+                    self.position[1] -= 1
+                    break
+            if keyboard.is_pressed('s'):
+                while keyboard.is_pressed('s'):
+                    n = 1
+                if self.position[1] == self.y - 1:
+                    break
+                else:
+                    self.position[1] += 1
+                    break
+            if keyboard.is_pressed('a'):
+                while keyboard.is_pressed('a'):
+                    n = 1
+                if self.position[0] == 0:
+                    break
+                else:
+                    self.position[0] -= 1
+                    break
+            if keyboard.is_pressed('d'):
+                while keyboard.is_pressed('d'):
+                    n = 1
+                if self.position[0] == self.x - 1:
+                    break
+                else:
+                    self.position[0] += 1
+                    break
     # todo: die,
     # todo: save_last position
     # todo: get_last position
@@ -86,8 +127,11 @@ class Hero(character):
 class Monster(character):
     # make child of character class
     def __init__(self, room):
-        character.__init__(room)
-        self.movement.queue = []
-    # todo: pursue Hero, initial path finding, use Dijstras
+        character.__init__(self, room)
+        self.movement_queue = []
+
     # todo: move, take command from movement queue made from path finding
     # todo: update path, gets last position of hero, from tha position, updates movement queue
+
+    def pursue_hero(self):
+        # todo: pursue Hero, initial path finding, use Dijstras

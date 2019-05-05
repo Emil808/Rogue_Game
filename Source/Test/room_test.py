@@ -1,6 +1,7 @@
 
 from Source.Rogue import room
 from Source.Rogue import Hero
+from Source.Rogue import Monster
 
 class Test_room(object):
     def setup_class(self):
@@ -24,4 +25,20 @@ class Test_room(object):
     def test_hero_generation(self):
         room0 = room()
         hero = Hero(room0)
-        room0.print(hero)
+        monster = Monster(room0)
+        room0.print(hero, monster)
+
+
+    def test_monster_generation(self):
+        room0 = room()
+        hero = Hero(room0)
+        monster = Monster(room0)
+        room0.print(hero, monster)
+
+    def test_hero_move(self):
+        room0 = room()
+        hero = Hero(room0)
+        monster = Monster(room0)
+        room0.print(hero, monster)
+        hero.move()
+        room0.print(hero, monster)
