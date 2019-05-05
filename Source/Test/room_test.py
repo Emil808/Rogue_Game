@@ -1,6 +1,6 @@
 
 from Source.Rogue import room
-
+from Source.Rogue import Hero
 
 class Test_room(object):
     def setup_class(self):
@@ -20,3 +20,8 @@ class Test_room(object):
         connections = room0.get_room_nodes()
         print("Room Connections")
         print(connections.vertices)
+
+    def test_hero_generation(self):
+        room0 = room()
+        hero = Hero(room0)
+        room0.print(hero)

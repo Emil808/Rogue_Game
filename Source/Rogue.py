@@ -39,11 +39,15 @@ class room:
         return self.map
 
     # todo: take in positions of characters and print them in their positions
-    def print(self):
+    def print(self, Hero):
+        hero_position = Hero.get_position()
         print("")
         for j in range(self.y):
             for i in range(self.x):
-                print('#', end='')
+                if [i, j] == hero_position:
+                    print('H', end='')
+                else:
+                    print('#', end='')
             print("")
 
 
@@ -52,7 +56,7 @@ class character:
     def __init__(self, room):
 
         # generate random position within room limits
-        self.position = [random.randint(0, room.x), random.randint(0, room.y)]   # [x,y]
+        self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
 
     def get_position(self):     # returns position
         return self.position
