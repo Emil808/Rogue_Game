@@ -28,7 +28,7 @@ Character class
            move is within the map limits
            
     Position : save previous and current position
-    Pursue   : path finding function for monster to player. shortest path function, use Dijstra
+    Pursue   : path finding function for monster to player. shortest path function, use Dijkstra
     Die      : if monster and player share same position, player dies
     
     child class of Character class

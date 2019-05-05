@@ -39,8 +39,9 @@ class room:
         return self.map
 
     # todo: take in positions of characters and print them in their positions
-    def print(self, Hero):
+    def print(self, Hero, Monster):
         hero_position = Hero.get_position()
+        monster_position = Monster.get_position()
         print("")
         for a in range(self.x+2):
             print('#', end='')
@@ -71,14 +72,22 @@ class character:
 
     # todo: move
 
+
 class Hero(character):
-    pass  # child of character class
+    # child of character class
+    def __init__(self, room):
+        character.__init__()
+        self.last_position = self.position
     # todo: die,
     # todo: save_last position
     # todo: get_last position
 
+
 class Monster(character):
-    pass  # make child of character class
+    # make child of character class
+    def __init__(self, room):
+        character.__init__(room)
+        self.movement.queue = []
     # todo: pursue Hero, initial path finding, use Dijstras
     # todo: move, take command from movement queue made from path finding
     # todo: update path, gets last position of hero, from tha position, updates movement queue
