@@ -87,41 +87,46 @@ class Hero(character):
     def move(self):
         # movement for hero character, need to call room.print to see changes
         while 1:
-            if keyboard.is_pressed('w'):
+            if keyboard.is_pressed('w'):    # move up
                 while keyboard.is_pressed('w'):
                     n = 1
                 if self.position[1] == 0:
                     break
                 else:
+                    self.last_position = self.position
                     self.position[1] -= 1
                     break
-            if keyboard.is_pressed('s'):
+            if keyboard.is_pressed('s'):    # move down
                 while keyboard.is_pressed('s'):
                     n = 1
                 if self.position[1] == self.y - 1:
                     break
                 else:
+                    self.last_position = self.position
                     self.position[1] += 1
                     break
-            if keyboard.is_pressed('a'):
+            if keyboard.is_pressed('a'):    # move left
                 while keyboard.is_pressed('a'):
                     n = 1
                 if self.position[0] == 0:
                     break
                 else:
+                    self.last_position = self.position
                     self.position[0] -= 1
                     break
-            if keyboard.is_pressed('d'):
+            if keyboard.is_pressed('d'):    # move right
                 while keyboard.is_pressed('d'):
                     n = 1
                 if self.position[0] == self.x - 1:
                     break
                 else:
+                    self.last_position = self.position
                     self.position[0] += 1
                     break
     # todo: die,
-    # todo: save_last position
-    # todo: get_last position
+    def get_last_position(self):    # return last position, used for monster update path
+        return self.last_position
+
 
 
 class Monster(character):
