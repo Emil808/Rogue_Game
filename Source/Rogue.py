@@ -42,13 +42,21 @@ class room:
     def print(self, Hero):
         hero_position = Hero.get_position()
         print("")
+        for a in range(self.x+2):
+            print('#', end='')
+        print("")
         for j in range(self.y):
+            print('#', end='')
             for i in range(self.x):
                 if [i, j] == hero_position:
                     print('H', end='')
                 else:
-                    print('#', end='')
+                    print(' ', end='')
+            print('#', end='')
             print("")
+        for a in range(self.x+2):
+            print('#', end='')
+        print("")
 
 
 class character:
