@@ -27,9 +27,11 @@ class Vertex:
 class Graph:
     def __init__(self):
         self.vertices = {}      # dictionary of vertices
+        self.vertice_amount = 0
 
     def add_vertex(self, vertex):
         self.vertices[vertex.name] = vertex   # adds vertex to dictionary, key is name, value is vertex object
+        self.vertice_amount += 1
         return 1
 
     def get_vertex(self, n):            # n is vertex name

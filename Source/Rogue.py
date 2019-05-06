@@ -9,7 +9,7 @@ class room:
         self.x = random.randint(10, 15)  # x dimension of the room
         self.y = random.randint(5, 7)  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
-        nodes = self.x * self.y # save total amount of nodes
+        nodes = self.x * self.y  # save total amount of nodes
         for i in range(nodes):  # initializes vertices on the room
             self.map.add_vertex(Vertex(i))
 
@@ -69,8 +69,8 @@ class character:
 
         # generate random position within room limits
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
-        self.x_limit = room.x
-        self.y_limit = room.y
+        self.x = room.x
+        self.y= room.y
     def get_position(self):     # returns position
         return self.position
 
@@ -119,7 +119,13 @@ class Hero(character):
                     self.last_position = self.position
                     self.position[0] += 1
                     break
-    # todo: die,
+
+    def die(self, monster): # die
+        if self.get_position() == monster.get_position():
+            return True
+        else:
+            return False
+
     def get_last_position(self):    # return last position, used for monster update path
         return self.last_position
 
@@ -137,8 +143,17 @@ class Monster(character):
     def pursue_hero(self, hero_position, room_nodes):
         # with hero_position,
         # use Dijkstra,
-        monster_node = self.y_limit * self.position[1] + self.position[0]  # node = y_limit * y_position + x_position
-        hero_node = self.y_limit * hero_position[1] + hero_position[1]
+        monster_node = self.y * self.position[1] + self.position[0]  # node = y_limit * y_position + x_position
+        hero_node = self.y * hero_position[1] + hero_position[1]
+        stack = []
+        touched = []
+        distance = []
+        edge_from = []
+        for i in range(room_nodes.vertice_amount):
+            touched.append(False)
+            distance.append("Inf")
+            edge_from.append(None)
+
         # nodes,
             # distance, edge from, touched
             # initial distance = infinity
@@ -146,4 +161,4 @@ class Monster(character):
         # start at monster initial position, work with node numbers
             # initial position distance = 0, edge_from, na, touched 1
             # look at current node connections, if not touched, push onto stack to check
-            
+

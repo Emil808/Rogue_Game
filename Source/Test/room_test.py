@@ -42,3 +42,10 @@ class Test_room(object):
         room0.print(hero, monster)
         hero.move()
         room0.print(hero, monster)
+
+    def test_pursue_hero(self):
+        room0 = room()
+        hero = Hero(room0)
+        monster = Monster(room0)
+        room0.print(hero, monster)
+        monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
