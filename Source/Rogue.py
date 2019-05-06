@@ -9,7 +9,7 @@ class room:
         self.x = random.randint(10, 15)  # x dimension of the room
         self.y = random.randint(5, 7)  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
-        nodes = self.x * self.y # save total amount of nodes
+        nodes = self.x * self.y  # save total amount of nodes
         for i in range(nodes):  # initializes vertices on the room
             self.map.add_vertex(Vertex(i))
 
@@ -71,7 +71,8 @@ class character:
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
         self.x = room.x
         self.y = room.y
-    def get_position(self):     # returns position
+
+    def get_position(self):  # returns position
         return self.position
 
 
@@ -124,6 +125,13 @@ class Hero(character):
                     self.position[0] += 1
                     break
     # todo: die,
+
+    def die(self, monster):
+        if self.get_position() == monster.get_position():
+            return True
+        else:
+            return False
+
     def get_last_position(self):    # return last position, used for monster update path
         return self.last_position
 
