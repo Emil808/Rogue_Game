@@ -146,4 +146,4 @@ class Monster(character):
         # start at monster initial position, work with node numbers
             # initial position distance = 0, edge_from, na, touched 1
             # look at current node connections, if not touched, push onto stack to check
-
+            
