@@ -139,4 +139,5 @@ class Monster(character):
     # todo: update path, gets last position of hero, from tha position, updates movement queue
 
     def pursue_hero(self):
-        # todo: pursue Hero, initial path finding, use Dijstras
+        return 1;
+#todo: pursue Hero, initial path finding, use Dijstras
