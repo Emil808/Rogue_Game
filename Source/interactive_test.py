@@ -5,11 +5,13 @@ from Source.Rogue import Hero
 from Source.Rogue import Monster
 import keyboard
 
-
-
 room0 = room()
 hero = Hero(room0)
 monster = Monster(room0)
+
+while hero.die(monster):  # edge case for hero and monster starting at same spot
+    hero = Hero(room0)
+
 room0.print(hero, monster)
 print("Game Start\n")
 
