@@ -69,14 +69,10 @@ class character:
 
         # generate random position within room limits
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
-        self.x = room.x
-        self.y = room.y
+        self.x_limit = room.x
+        self.y_limit = room.y
     def get_position(self):     # returns position
         return self.position
-
-
-
-
 
 class Hero(character):
     # child of character class
@@ -138,5 +134,16 @@ class Monster(character):
     # todo: move, take command from movement queue made from path finding
     # todo: update path, gets last position of hero, from tha position, updates movement queue
 
-    def pursue_hero(self):
-        # todo: pursue Hero, initial path finding, use Dijstras
+    def pursue_hero(self, hero_position, room_nodes):
+        # with hero_position,
+        # use Dijkstra,
+        monster_node = self.y_limit * self.position[1] + self.position[0]  # node = y_limit * y_position + x_position
+        hero_node = self.y_limit * hero_position[1] + hero_position[1]
+        # nodes,
+            # distance, edge from, touched
+            # initial distance = infinity
+            # touched = false
+        # start at monster initial position, work with node numbers
+            # initial position distance = 0, edge_from, na, touched 1
+            # look at current node connections, if not touched, push onto stack to check
+            
