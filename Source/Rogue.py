@@ -69,14 +69,9 @@ class character:
         # generate random position within room limits
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
         self.x = room.x
-        self.y = room.y
-
-    def get_position(self):  # returns position
+        self.y= room.y
+    def get_position(self):     # returns position
         return self.position
-
-
-
-
 
 class Hero(character):
     # child of character class
@@ -124,7 +119,7 @@ class Hero(character):
                     self.position[0] += 1
                     break
 
-    def die(self, monster):
+    def die(self, monster): # die
         if self.get_position() == monster.get_position():
             return True
         else:
@@ -144,6 +139,51 @@ class Monster(character):
     # todo: move, take command from movement queue made from path finding
     # todo: update path, gets last position of hero, from tha position, updates movement queue
 
-    def pursue_hero(self):
-        return 1;
-#todo: pursue Hero, initial path finding, use Dijstras
+    def pursue_hero(self, hero_position, room_nodes):
+        # with hero_position,
+        # use Dijkstra,
+        monster_node = self.y * self.position[1] + self.position[0]  # node = y_limit * y_position + x_position
+        hero_node = self.y * hero_position[1] + hero_position[1]
+        queue = []
+        touched = []
+        distance = []
+        edge_from = []
+        for i in room_nodes.vertices: # initialize node information
+            touched.append(False)
+            distance.append("Inf")
+            edge_from.append(None)
+
+        current = monster_node
+        touched[current] = True
+        distance[current] = 0
+        edge_from[current] = current
+
+        new_distance = distance[edge_from[current]] + 1  # calculate new distance,
+        for i in room_nodes.vertices[current].neighbors:  # puts connection of current node onto stack
+            queue.append(i)
+            edge_from[i] = current
+            if distance[i] is "Inf" or distance[i] > new_distance:
+                distance[i] = new_distance  # relax edge
+
+        while queue:
+            current = queue.pop(0)  # look at next node in stack
+            touched[current] = True     # mark as touched
+
+            new_distance = distance[current] + 1  # calculate new distance,
+            for i in room_nodes.vertices[current].neighbors:
+                if touched[i] is False:
+                    edge_from[i] = current
+                    queue.append(i)
+                if distance[i] is "Inf" or distance[i] > new_distance:
+                    distance[i] = new_distance   # relax edge
+                    edge_from[i] = current
+
+        current = edge_from[hero_node]
+        while edge_from[current] is not current:
+            print(current)
+            current = edge_from[current]
+
+        # start at monster initial position, work with node numbers
+            # initial position distance = 0, edge_from, na, touched 1
+            # look at current node connections, if not touched, push onto stack to check
+
