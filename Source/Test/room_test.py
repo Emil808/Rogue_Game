@@ -49,3 +49,4 @@ class Test_room(object):
         monster = Monster(room0)
         room0.print(hero, monster)
         monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
+        print("done")
