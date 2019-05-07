@@ -174,16 +174,15 @@ class Monster(character):
                 if touched[i] is False:
                     edge_from[i] = current
                     queue.append(i)
-                if distance[i] is "Inf" or distance[i] > new_distance:
-                    distance[i] = new_distance   # relax edge
-                    edge_from[i] = current
-
-        current = edge_from[hero_node]
-        while edge_from[current] is not current:
-            print(current)
-            current = edge_from[current]
+                    if distance[i] is "Inf" or distance[i] > new_distance:
+                        distance[i] = new_distance   # relax edge
+                        edge_from[i] = current
 
         # start at monster initial position, work with node numbers
-            # initial position distance = 0, edge_from, na, touched 1
-            # look at current node connections, if not touched, push onto stack to check
+        # initial position distance = 0, edge_from, na, touched 1
+        # look at current node connections, if not touched, push onto stack to check
+
+        quotient = current / self.x
+        remainder = current % self.x
+        self.position = [int(remainder), int(quotient)]
 

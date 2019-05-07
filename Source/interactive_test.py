@@ -17,6 +17,7 @@ print("Game Start\n")
 
 while 1:
     hero.move()
+    monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
     room0.print(hero, monster)
     if hero.die(monster):
         print("YOU LOSE!\nGAME OVER.\n")
