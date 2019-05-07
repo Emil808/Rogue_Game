@@ -39,7 +39,6 @@ class room:
     def get_room_nodes(self):    # return connection list for path finding functions in monster and player character
         return self.map
 
-    # todo: edge case if monster is generated in same position as hero
     def print(self, Hero, Monster):
         hero_position = Hero.get_position()
         monster_position = Monster.get_position()
@@ -124,7 +123,6 @@ class Hero(character):
                     self.last_position = self.position
                     self.position[0] += 1
                     break
-    # todo: die,
 
     def die(self, monster):
         if self.get_position() == monster.get_position():
