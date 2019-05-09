@@ -27,12 +27,19 @@ while ans:
 
         while 1:
             hero.move()
-            monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
-            room0.print(hero, monster)
-            print("Current Score:", count, "\nHigh Score:", high_score, "\n")
             if hero.die(monster):
+                room0.print(hero, monster)
                 print("YOU LOSE!\nGAME OVER.\n")
                 break
+            monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
+            if hero.die(monster):
+                room0.print(hero, monster)
+                print("YOU LOSE!\nGAME OVER.\n")
+                break
+            room0.print(hero, monster)
+            print("Current Score:", count, "\nHigh Score:", high_score, "\n")
+
+
             count = count + 1
             if count > high_score:
                 high_score = count
