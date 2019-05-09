@@ -10,7 +10,7 @@ class room:
         self.y = random.randint(5, 7)  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
         nodes = self.x * self.y  # save total amount of nodes
-        for i in range(nodes):  # initializes vertices on the room
+        for i in range(nodes):  # initipalizes vertices on the room
             self.map.add_vertex(Vertex(i))
 
         # connects first and last row nodes
