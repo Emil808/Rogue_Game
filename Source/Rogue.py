@@ -49,8 +49,11 @@ class room:
         print("")
         for a in range(self.x+2):
             if self.exit is 0:
-                if a is self.exit_node[0]:
-                    print(' ', end='')
+                if a is self.exit_node[0] + 1:
+                    if Hero.at_exit is True:
+                        print('H', end='')
+                    else:
+                        print(' ', end='')
                 else:
                     print('#', end='')
             else:
@@ -59,7 +62,10 @@ class room:
         for j in range(self.y):
             if self.exit is 2:
                 if j is self.exit_node[1]:
-                    print(' ', end='')
+                    if Hero.at_exit is True:
+                        print('H', end='')
+                    else:
+                        print(' ', end='')
                 else:
                     print('#', end='')
             else:
@@ -69,7 +75,10 @@ class room:
                 if [i, j] == monster_position:
                     print('M', end='')
                 elif [i, j] == hero_position:
-                    print('H', end='')
+                    if Hero.at_exit is True:
+                        print(' ', end='')
+                    else:
+                        print('H', end='')
                 else:
                     print(' ', end='')
 
@@ -83,8 +92,11 @@ class room:
             print("")
         for a in range(self.x+2):
             if self.exit is 1:
-                if a is self.exit_node[0]:
-                    print(' ', end='')
+                if a is self.exit_node[0] + 1:
+                    if Hero.at_exit is True:
+                        print('H', end='')
+                    else:
+                        print(' ', end='')
                 else:
                     print('#', end='')
             else:

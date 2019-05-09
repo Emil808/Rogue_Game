@@ -29,6 +29,7 @@ while ans:
         while 1:
             hero.move()
             if hero.at_exit is True:
+                room0.print(hero, monster)
                 print("\nYOU WON!\nPlay Again?\n")
                 break
             if hero.die(monster):
