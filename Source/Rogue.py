@@ -39,7 +39,6 @@ class room:
     def get_room_nodes(self):    # return connection list for path finding functions in monster and player character
         return self.map
 
-
     def print(self, Hero, Monster):
         hero_position = Hero.get_position()
         monster_position = Monster.get_position()
@@ -62,17 +61,19 @@ class room:
             print('#', end='')
         print("")
 
-
 class character:
 
     def __init__(self, room):
 
         # generate random position within room limits
         self.position = [random.randint(0, room.x - 1), random.randint(0, room.y - 1)]   # [x,y]
+        self.node = room.x * self.position[1] + self.position[0]
         self.x = room.x
-        self.y= room.y
+        self.y = room.y
+
     def get_position(self):     # returns position
         return self.position
+
 
 class Hero(character):
     # child of character class
@@ -130,7 +131,6 @@ class Hero(character):
         return self.last_position
 
 
-
 class Monster(character):
     # make child of character class
     def __init__(self, room):
@@ -140,45 +140,47 @@ class Monster(character):
     # todo: move, take command from movement queue made from path finding
     # todo: update path, gets last position of hero, from tha position, updates movement queue
 
-    def pursue_hero(self, hero_position, room_nodes):
+    def pursue_hero(self, hero, room_nodes):
         # with hero_position,
         # use Dijkstra,
-        monster_node = self.y * self.position[1] + self.position[0]  # node = y_limit * y_position + x_position
-        hero_node = self.y * hero_position[1] + hero_position[0]
+        monster_node = self.node
+        hero_node = hero.node
         queue = []
         touched = []
         distance = []
         edge_from = []
-        for i in room_nodes.vertices: # initialize node information
+
+        for i in range(room_nodes.vertice_amount):  # initialize needed data
             touched.append(False)
-            distance.append("Inf")
+            distance.append('I')
             edge_from.append(None)
 
-        touched[monster_node] = True
-        distance[monster_node] = 0
-        queue.append(monster_node)
-
-        while queue:
+        queue.append(monster_node)  # pushes monster's node onto queue
+        distance[monster_node] = 0  # origin node distance is 0
+        edge_from[monster_node] = monster_node
+        # makes minimum spanning tree
+        while queue:  # loop while there are still things in the queue
             current = queue.pop(0)
-            for j in room_nodes.vertices[current].neighbors:
-                if distance[j] is "Inf" or distance[j] > distance[current] + 1:
-                    distance[j] = distance[current] + 1
-                    edge_from[j] = current
-                    if j in queue:
-                        queue.remove(j)
-                    else:
-                        queue.append(j)
+            touched[current] = True  # update current to be touched
+
+            for i in room_nodes.vertices[current].neighbors:  # for nodes connected to current
+                if touched[i] is False:  # if nodes were not touched before
+                    if i not in queue:
+                        queue.append(i)  # store in queue to be looked at later
+                    new_distance = distance[current] + 1
+                    if distance[i] is 'I' or distance[i] >= new_distance:
+                        # if distance to I is infinity or if new distance is less than the present I distance
+                        distance[i] = 1 + distance[current]  # distance to i node is current's distance + 1
+                        edge_from[i] = current   # i came from edge connected to current
 
         current = hero_node
-        while edge_from[current] is not monster_node:
-            print(current)
-            current = edge_from[current]
+        next_node = edge_from[current]
+        while next_node is not monster_node:  # finds from hero to monster
+            current = next_node
+            next_node = edge_from[current]
+        # current is the next node that monster should move too
+        self.position[1] = current // self.x
+        self.position[0] = current % self.x
+        self.node = current
 
-        quotient = current / self.x
-        remainder = current % self.x
-        self.position = [int(remainder), int(quotient)]
-
-        # start at monster initial position, work with node numbers
-            # initial position distance = 0, edge_from, na, touched 1
-            # look at current node connections, if not touched, push onto stack to check
 
