@@ -110,6 +110,8 @@ class Hero(character):
     def __init__(self, room):
         character.__init__(self, room)
         self.last_position = self.position
+        self.exit = room.exit
+        self.exit_node = room.exit_node
 
     def move(self):
         # movement for hero character, need to call room.print to see changes
@@ -150,6 +152,7 @@ class Hero(character):
                     self.last_position = self.position
                     self.position[0] += 1
                     break
+        self.node = self.x * self.position[1] + self.position[0]
 
     def die(self, monster): # die
         if self.get_position() == monster.get_position():  # if monster and hero on same position, hero dies
