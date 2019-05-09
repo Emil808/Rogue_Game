@@ -1,26 +1,38 @@
 
 # Rogue
 
-Goals:
-	
-	Implement rogue game
-	Implement automatic Monster
-	Implement Automatic Player Character
+Accomplished:
 
-Needed for game:
+    Generate one rectangle room
+    spawn one Hero, and one Monster in room
+    Implemented exit woor for Hero to get too
+    score keeps track of amount of moves Hero stayed alive
+    win state when Hero reaches door way 
+Goals:
+
+	Fix automatic Monster
+	Implement Automatic Player Character
+	Implement attacking/defending, health
+	Implement treasure to boost attacking/defending, health 
+	Level system to improve A/D/H
+	More rooms
+	halways between rooms
+	Multiple monsters
+	GUI?
+
+BUGS:
+
+    monster not going next to player, always one space away. this was done to allow player to move around monster
+Essentials for game:
     
-    map generator (completed: map generation, undirected-connections for the spaces, printing room)
+    Room generation 
     Characters, position [x][y] 
  	    player, will Die if monster is in same space
  	    monster, monster needs to Pursue player
 
-characters can Move within a map
+Possible Features
 
-Possible Featuers
-
-    Map generation (done) 
-    Character generation
-    
+    ?
 Character class
     
     Generation: randomly places character within limits of the room
@@ -49,7 +61,3 @@ Monster Pursue Player
 	    graph algorithm from last player position to update path for monster. 
 	from movement queue, monster moves
  	
-
-Also need to make an automatic player character,
-	
-	graph algorithm for pathfinding to avoid monster
