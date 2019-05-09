@@ -25,12 +25,18 @@ while ans:
 
         while 1:
             hero.move()
-            monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
-            room0.print(hero, monster)
-
             if hero.die(monster):
+                room0.print(hero, monster)
                 print("YOU LOSE!\nGAME OVER.\n")
                 break
+            monster.pursue_hero(hero.get_position(), room0.get_room_nodes())
+            if hero.die(monster):
+                room0.print(hero, monster)
+                print("YOU LOSE!\nGAME OVER.\n")
+                break
+            room0.print(hero, monster)
+
+
     elif start == 'q':
         print("Thank you for playing.")
         ans = False

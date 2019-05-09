@@ -39,7 +39,7 @@ class room:
     def get_room_nodes(self):    # return connection list for path finding functions in monster and player character
         return self.map
 
-    # todo: edge case if monster is generated in same position as hero
+
     def print(self, Hero, Monster):
         hero_position = Hero.get_position()
         monster_position = Monster.get_position()
@@ -50,10 +50,10 @@ class room:
         for j in range(self.y):
             print('#', end='')
             for i in range(self.x):
-                if [i, j] == hero_position:
-                    print('H', end='')
-                elif [i, j] == monster_position:
+                if [i, j] == monster_position:
                     print('M', end='')
+                elif [i, j] == hero_position:
+                    print('H', end='')
                 else:
                     print(' ', end='')
             print('#', end='')
@@ -177,9 +177,6 @@ class Monster(character):
         quotient = current / self.x
         remainder = current % self.x
         self.position = [int(remainder), int(quotient)]
-
-
-
 
         # start at monster initial position, work with node numbers
             # initial position distance = 0, edge_from, na, touched 1
