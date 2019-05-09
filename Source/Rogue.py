@@ -10,7 +10,7 @@ class room:
         self.y = random.randint(5, 7)  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
         nodes = self.x * self.y  # save total amount of nodes
-        for i in range(nodes):  # initializes vertices on the room
+        for i in range(nodes):  # initipalizes vertices on the room
             self.map.add_vertex(Vertex(i))
 
         # connects first and last row nodes
@@ -32,8 +32,8 @@ class room:
                     self.map.add_edge(a + row, a + row + 1, 1)
                 self.map.add_edge(a + row, a + row + self.x, 1)
         # generates exit node
-        self.exit_gen = [[random.randint(1, self.x-2), 0], [random.randint(1, self.x-2), self.y-1],
-                    [0, random.randint(1, self.y-2)], [self.x-1, random.randint(1, self.y-2)]]
+        self.exit_gen = [[random.randint(0, self.x-2), 0], [random.randint(0, self.x-2), self.y-1],
+                    [0, random.randint(0, self.y-2)], [self.x-1, random.randint(0, self.y-2)]]
         self.exit = random.randint(0,3)  # chooses random exit node
         self.exit_node = self.exit_gen[self.exit]
     #  current row:  # - # - # - #

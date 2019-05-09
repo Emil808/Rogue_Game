@@ -9,9 +9,11 @@ import keyboard
 #start = input("Press 'p' to Play\nPress 'q' to Quit")
 
 ans = True
+high_score = 0
 while ans:
     print("Welcome to Rogue\n")
     start = input("Press 'p' to Play.\nPress 'q' to Quit.\n")
+    count = 1
     if start == 'p':
         print("~~Game Start~~\n")
         room0 = room()
@@ -22,7 +24,7 @@ while ans:
             hero = Hero(room0)
 
         room0.print(hero, monster)
-
+        print("Game Start:\n")
 
         while 1:
             hero.move()
@@ -31,17 +33,21 @@ while ans:
                 break
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("\nYOU LOSE!\nGAME OVER.\n")
+                print("High Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
                 break
             monster.pursue_hero(hero, room0.get_room_nodes())
 
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("\nYOU LOSE!\nGAME OVER.\n")
+                print("High Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
                 break
             room0.print(hero, monster)
+            print("Current Score:", count, "\nHigh Score:", high_score, "\n")
 
 
+            count = count + 1
+            if count > high_score:
+                high_score = count
     elif start == 'q':
-        print("Thank you for playing!")
+        print("High Score:", high_score, "\nThank you for playing.")
         ans = False
