@@ -112,7 +112,7 @@ class Hero(character):
         self.last_position = self.position
         self.exit = room.exit
         self.exit_node = room.exit_node
-
+        self.at_exit = False
     def move(self):
         # movement for hero character, need to call room.print to see changes
         while 1:
@@ -120,6 +120,8 @@ class Hero(character):
                 while keyboard.is_pressed('w'):
                     n = 1
                 if self.position[1] == 0:
+                    if self.exit == 0 and self.position == self.exit_node:
+                        self.at_exit = True
                     break
                 else:
                     self.last_position = self.position
@@ -129,6 +131,8 @@ class Hero(character):
                 while keyboard.is_pressed('s'):
                     n = 1
                 if self.position[1] == self.y - 1:
+                    if self.exit == 1 and self.position == self.exit_node:
+                        self.at_exit = True
                     break
                 else:
                     self.last_position = self.position
@@ -138,6 +142,8 @@ class Hero(character):
                 while keyboard.is_pressed('a'):
                     n = 1
                 if self.position[0] == 0:
+                    if self.exit == 2 and self.position == self.exit_node:
+                        self.at_exit = True
                     break
                 else:
                     self.last_position = self.position
@@ -147,6 +153,8 @@ class Hero(character):
                 while keyboard.is_pressed('d'):
                     n = 1
                 if self.position[0] == self.x - 1:
+                    if self.exit == 3 and self.position == self.exit_node:
+                        self.at_exit = True
                     break
                 else:
                     self.last_position = self.position

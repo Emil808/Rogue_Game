@@ -26,16 +26,18 @@ while ans:
 
         while 1:
             hero.move()
-
+            if hero.at_exit is True:
+                print("\nYOU WON!\nPlay Again?\n")
+                break
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("YOU LOSE!\nGAME OVER.\n")
+                print("\nYOU LOSE!\nGAME OVER.\n")
                 break
             monster.pursue_hero(hero, room0.get_room_nodes())
 
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("YOU LOSE!\nGAME OVER.\n")
+                print("\nYOU LOSE!\nGAME OVER.\n")
                 break
             room0.print(hero, monster)
 
