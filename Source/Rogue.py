@@ -168,7 +168,7 @@ class Monster(character):
     # make child of character class
     def __init__(self, room):
         character.__init__(self, room)
-
+        self.movement_queue = []
     def pursue_hero(self, hero, room_nodes):
         # with hero_position,
         # use Dijkstra,
@@ -204,12 +204,35 @@ class Monster(character):
 
         current = hero_node
         next_node = edge_from[current]
-        while next_node is not monster_node:  # finds from hero to monster
-            current = next_node
-            next_node = edge_from[current]
-        # current is the next node that monster should move too
-        self.position[1] = current // self.x  # update position of monster
-        self.position[0] = current % self.x
-        self.node = current
+
+
+        if next_node is monster_node:
+            self.movement_queue.append(monster_node)
+
+            current = self.movement_queue.pop()
+            self.position[1] = current // self.x  # update position of monster
+            self.position[0] = current % self.x
+            self.node = current
+            return
+
+        elif edge_from[next_node] is monster_node:
+            return
+        else:
+            movement = []
+
+            while next_node is not monster_node:  # finds from hero to monster
+                current = next_node
+                movement.insert(0, current)
+                next_node = edge_from[current]
+            for i in range(len(movement)):
+                if i < 1:
+                    self.movement_queue.append(movement[i])
+                else:
+                    break
+            # current is the next node that monster should move too
+            current = self.movement_queue.pop()
+            self.position[1] = current // self.x  # update position of monster
+            self.position[0] = current % self.x
+            self.node = current
 
 
