@@ -31,7 +31,11 @@ class room:
                 if a < self.x - 1:
                     self.map.add_edge(a + row, a + row + 1, 1)
                 self.map.add_edge(a + row, a + row + self.x, 1)
-
+        # generates exit node
+        self.exit_gen = [[random.randint(1, self.x-2), 0], [random.randint(1, self.x-2), self.y-1],
+                    [0, random.randint(1, self.y-2)], [self.x-1, random.randint(1, self.y-2)]]
+        self.exit = random.randint(0,3)  # chooses random exit node
+        self.exit_node = self.exit_gen[self.exit]
     #  current row:  # - # - # - #
     #                |   |   |   |
     #  next row      #   #   #   #
@@ -44,10 +48,23 @@ class room:
         monster_position = Monster.get_position()
         print("")
         for a in range(self.x+2):
-            print('#', end='')
+            if self.exit is 0:
+                if a is self.exit_node[0]:
+                    print(' ', end='')
+                else:
+                    print('#', end='')
+            else:
+                print('#', end='')
         print("")
         for j in range(self.y):
-            print('#', end='')
+            if self.exit is 2:
+                if j is self.exit_node[1]:
+                    print(' ', end='')
+                else:
+                    print('#', end='')
+            else:
+                print('#', end='')
+
             for i in range(self.x):
                 if [i, j] == monster_position:
                     print('M', end='')
@@ -55,10 +72,23 @@ class room:
                     print('H', end='')
                 else:
                     print(' ', end='')
-            print('#', end='')
+
+            if self.exit is 3:
+                if j is self.exit_node[1]:
+                    print(' ', end='')
+                else:
+                    print('#', end='')
+            else:
+                print('#', end='')
             print("")
         for a in range(self.x+2):
-            print('#', end='')
+            if self.exit is 1:
+                if a is self.exit_node[0]:
+                    print(' ', end='')
+                else:
+                    print('#', end='')
+            else:
+                print('#', end='')
         print("")
 
 class character:
@@ -122,7 +152,7 @@ class Hero(character):
                     break
 
     def die(self, monster): # die
-        if self.get_position() == monster.get_position():
+        if self.get_position() == monster.get_position():  # if monster and hero on same position, hero dies
             return True
         else:
             return False
@@ -135,10 +165,6 @@ class Monster(character):
     # make child of character class
     def __init__(self, room):
         character.__init__(self, room)
-        self.movement_queue = []
-
-    # todo: move, take command from movement queue made from path finding
-    # todo: update path, gets last position of hero, from tha position, updates movement queue
 
     def pursue_hero(self, hero, room_nodes):
         # with hero_position,
@@ -179,7 +205,7 @@ class Monster(character):
             current = next_node
             next_node = edge_from[current]
         # current is the next node that monster should move too
-        self.position[1] = current // self.x
+        self.position[1] = current // self.x  # update position of monster
         self.position[0] = current % self.x
         self.node = current
 
