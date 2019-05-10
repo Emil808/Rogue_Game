@@ -32,12 +32,12 @@ while ans:
             hero.move()
             if hero.at_exit is True:
                 room0.print(hero, monster)
-                print("\nYOU WON!\nPlay Again?\n")
                 if not once:
                     high_score = score
                     once = True
                 elif high_score > score and once:
                     high_score = score
+                print("\nYOU WON!\nHigh Score:", high_score, "\nPlay Again?\n")
                 break
             if hero.die(monster):
                 room0.print(hero, monster)
