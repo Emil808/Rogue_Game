@@ -32,29 +32,28 @@ while ans:
             hero.move()
             if hero.at_exit is True:
                 room0.print(hero, monster)
-                print("\nYOU WON!\nPlay Again?\n")
                 if not once:
                     high_score = score
                     once = True
                 elif high_score > score and once:
                     high_score = score
+                print("\nYOU WON!\nBest Score:", high_score, "\nPlay Again?\n")
                 break
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("High Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
+                print("Best Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
                 break
             monster.pursue_hero(hero, room0.get_room_nodes())
 
             if hero.die(monster):
                 room0.print(hero, monster)
-                print("High Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
+                print("Best Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
                 break
             room0.print(hero, monster)
-            print("Current Score:", score, "\nHigh Score:", high_score, "\n")
-
+            print("Current Score:", score, "\nBest Score:", high_score, "\n")
 
             score = score + 1
 
     elif start == 'q':
-        print("High Score:", high_score, "\nThank you for playing.")
+        print("Best Score:", high_score, "\nThank you for playing.")
         ans = False
