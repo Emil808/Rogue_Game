@@ -10,10 +10,12 @@ import keyboard
 
 ans = True
 high_score = 0
+once = False
+
 while ans:
     print("Welcome to Rogue\n")
     start = input("Press 'p' to Play.\nPress 'q' to Quit.\n")
-    count = 1
+    score = 1
     if start == 'p':
         print("~~Game Start~~\n")
         room0 = room()
@@ -31,6 +33,11 @@ while ans:
             if hero.at_exit is True:
                 room0.print(hero, monster)
                 print("\nYOU WON!\nPlay Again?\n")
+                if not once:
+                    high_score = score
+                    once = True
+                elif high_score > score and once:
+                    high_score = score
                 break
             if hero.die(monster):
                 room0.print(hero, monster)
@@ -43,12 +50,11 @@ while ans:
                 print("High Score:", high_score, "\nYOU LOSE!\nGAME OVER.\n")
                 break
             room0.print(hero, monster)
-            print("Current Score:", count, "\nHigh Score:", high_score, "\n")
+            print("Current Score:", score, "\nHigh Score:", high_score, "\n")
 
 
-            count = count + 1
-            if count > high_score:
-                high_score = count
+            score = score + 1
+
     elif start == 'q':
         print("High Score:", high_score, "\nThank you for playing.")
         ans = False
