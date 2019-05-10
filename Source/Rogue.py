@@ -5,9 +5,9 @@ from Source.Auxillary.undirected_graph import Graph
 from Source.Auxillary.undirected_graph import Vertex
 
 class room:
-    def __init__(self):
-        self.x = random.randint(10, 11)  # x dimension of the room
-        self.y = random.randint(5, 7)  # y dimension of the room
+    def __init__(self, a = random.randint(10, 11), b = random.randint(5, 7)):
+        self.x = a  # x dimension of the room
+        self.y =  b # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
         nodes = self.x * self.y  # save total amount of nodes
         for i in range(nodes):  # initipalizes vertices on the room
@@ -225,7 +225,7 @@ class Monster(character):
         current = hero_node
         next_node = edge_from[current]
 
-
+        """
         if next_node is monster_node:
             self.movement_queue.append(monster_node)
 
@@ -237,22 +237,21 @@ class Monster(character):
 
         elif edge_from[next_node] is monster_node:
             return
-        else:
-            movement = []
-
-            while next_node is not monster_node:  # finds from hero to monster
-                current = next_node
-                movement.insert(0, current)
-                next_node = edge_from[current]
-            for i in range(len(movement)):
+        else:"""
+        movement = []
+        while next_node is not monster_node:  # finds from hero to monster
+           current = next_node
+           movement.insert(0, current)
+           next_node = edge_from[current]
+           for i in range(len(movement)):
                 if i < 1:
                     self.movement_queue.append(movement[i])
                 else:
                     break
             # current is the next node that monster should move too
-            current = self.movement_queue.pop()
-            self.position[1] = current // self.x  # update position of monster
-            self.position[0] = current % self.x
-            self.node = current
+        current = self.movement_queue.pop()
+        self.position[1] = current // self.x  # update position of monster
+        self.position[0] = current % self.x
+        self.node = current
 
 

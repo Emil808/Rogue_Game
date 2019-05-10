@@ -9,7 +9,8 @@ Accomplished:
     score keeps track of amount of moves Hero stayed alive
     win state when Hero reaches door way 
 Goals:
-
+    
+    Timing for finding path???
 	Fix automatic Monster
 	Implement Automatic Player Character
 	Implement attacking/defending, health
