@@ -7,7 +7,7 @@ from Source.Auxillary.undirected_graph import Vertex
 class room:
     def __init__(self, a = random.randint(10, 11), b = random.randint(5, 7)):
         self.x = a  # x dimension of the room
-        self.y =  b # y dimension of the room
+        self.y = b  # y dimension of the room
         self.map = Graph()  # undirected graph data type for the spaces in the room
         nodes = self.x * self.y  # save total amount of nodes
         for i in range(nodes):  # initipalizes vertices on the room
@@ -16,21 +16,27 @@ class room:
         # connects first and last row nodes
         # make a node network to be used for path finding later
         a = nodes - self.x
+        self.edges = 0
         while a < nodes - 1:
             self.map.add_edge(a, a + 1, 1)  # connects nodes within row y
             a += 1
+            self.edges += 1
         a = 0
         while a < self.x:
             if a < self.x - 1:
                 self.map.add_edge(a, a + 1, 1)  # connects nodes within row 0
+                self.edges += 1
             self.map.add_edge(a, a + self.x, 1) # connects this row to the nodes of the next row
+            self.edges += 1
             a += 1
         for j in range(1, self.y - 1): # starting from row 1
             row = j * self.x
             for a in range(0, self.x): # connects the nodes within the row, and nodes with the next row
                 if a < self.x - 1:
                     self.map.add_edge(a + row, a + row + 1, 1)
+                    self.edges += 1
                 self.map.add_edge(a + row, a + row + self.x, 1)
+                self.edges += 1
         # generates exit node
         self.exit_gen = [[random.randint(0, self.x-2), 0], [random.randint(0, self.x-2), self.y-1],
                     [0, random.randint(0, self.y-2)], [self.x-1, random.randint(0, self.y-2)]]
