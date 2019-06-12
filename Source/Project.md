@@ -11,13 +11,13 @@ Accomplished:
 Goals:
     
     Timing for finding path???
-	Fix automatic Monster
+	Fix Dijkstra path finding (priority queue for nodes) 
 	Implement Automatic Player Character
 	Implement attacking/defending, health
 	Implement treasure to boost attacking/defending, health 
 	Level system to improve A/D/H
-	More rooms
-	halways between rooms
+	Multiple Rooms
+	Hallways between rooms
 	Multiple monsters
 	GUI?
 
