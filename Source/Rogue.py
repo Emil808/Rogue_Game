@@ -125,6 +125,7 @@ class character:
 
 class Hero(character):
     # child of character class
+    # todo: make an automatic hero function
     def __init__(self, room):
         character.__init__(self, room)
         self.last_position = self.position
@@ -200,7 +201,7 @@ class Monster(character):
         # use Dijkstra,
         monster_node = self.node
         hero_node = hero.node
-        queue = []
+        queue = []  # todo: make a priority queue that will pop the lowest distance for Dijstra path finding
         touched = []
         distance = []
         edge_from = []
@@ -210,7 +211,7 @@ class Monster(character):
             distance.append('I')
             edge_from.append(None)
 
-        queue.append(monster_node)  # pushes monster's node onto queue
+        # queue.append(monster_node)  # pushes monster's node onto queue
         distance[monster_node] = 0  # origin node distance is 0
         edge_from[monster_node] = monster_node
         # makes minimum spanning tree
@@ -260,4 +261,11 @@ class Monster(character):
         self.position[0] = current % self.x
         self.node = current
 
+# todo: needs an object with node, and distance of that node
+class Priority_Queue:
+    # for priority queue
+    def __init__(self):
+        queue = []
+
+    def insert(self, obj):
 
