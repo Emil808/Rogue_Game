@@ -262,10 +262,45 @@ class Monster(character):
         self.node = current
 
 # todo: needs an object with node, and distance of that node
-class Priority_Queue:
-    # for priority queue
+class Node:
+    # node object, has a label and distance
+    def __init__(self, label, distance):
+        self.label = label
+        self.distance = distance
+# todo: test insert and pop
+class NodePQ:
+    # priority queue
+    # organizes Node objects, into a priority queue
     def __init__(self):
-        queue = []
-
+        self.queue = []
+    # todo: insert into a min heap
     def insert(self, obj):
+        #left 2i
+        # right 2i+1
+        # parent i//2
+        # if queue is empty, put obj as first thing
+        self.queue.append(obj)
+        if len(self.queue) > 1:
+            # check parent of last object in list
+            # if parent is greater than current, swap
+
+    # todo: pop from min heap
+    def pop(self):
+        min = self.queue[0]  # save 0th object
+        temp = self.queue.pop()  # pop last object
+        self.queue.insert(0, temp)  # insert it into the root of the heap
+        i = 0  # parent
+        left = 2 * i  # compare children nodes, choose lowest
+        right = 2 * i + 1  # compare parent with lowest child,
+        if self.queue[left] < self.queue[right]:
+            min_child = left
+        else:
+            min_child = right
+        while self.queue[i] > min_child:
+    # swap i with min child
+    # update i as position of min child
+    # find new min child
+    # break if no children exist
+    # if right child does not exist, just use left as min child
+    # function should break when i is less than minchild
 
