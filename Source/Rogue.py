@@ -284,23 +284,34 @@ class NodePQ:
             # check parent of last object in list
             # if parent is greater than current, swap
 
-    # todo: pop from min heap
+    def getminchild(self, i):
+        left = 2 * i        # from parent, i, find left and right children
+        right = 2 * i + 1
+        if left > len(self.queue):  # if left exceeds list length, parent has no children to chck
+            return -1
+        if right > len(self.queue) or self.queue[left] < self.queue[right]:  # if right exceeds list length, or if left
+            # is less than right
+            return left
+        else:
+            return right
+
+
+
     def pop(self):
         min = self.queue[0]  # save 0th object
         temp = self.queue.pop()  # pop last object
         self.queue.insert(0, temp)  # insert it into the root of the heap
         i = 0  # parent
-        left = 2 * i  # compare children nodes, choose lowest
-        right = 2 * i + 1  # compare parent with lowest child,
-        if self.queue[left] < self.queue[right]:
-            min_child = left
-        else:
-            min_child = right
+        min_child = self.getminchild(i)
+        if min_child is -1:
+            return min
         while self.queue[i] > min_child:
-    # swap i with min child
-    # update i as position of min child
-    # find new min child
-    # break if no children exist
-    # if right child does not exist, just use left as min child
-    # function should break when i is less than minchild
+            self.queue[i], self.queue[min_child] = self.queue[min_child], self.queue[i]  # swap i with min child
+            i = min_child  # update i as position of min child
+            min_child = self.getminchild(i) # find new min child
+            if min_child is -1:
+                break  # break if no children exist
+            if i < min_child:
+                break  # function should break when i is less than minchild
+        return min
 
