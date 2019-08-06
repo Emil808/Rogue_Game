@@ -281,6 +281,7 @@ class NodePQ:
         # if queue is empty, put obj as first thing
         self.queue.append(obj)
         if len(self.queue) > 1:
+            # todo: this part
             # check parent of last object in list
             # if parent is greater than current, swap
 
@@ -290,12 +291,10 @@ class NodePQ:
         if left > len(self.queue):  # if left exceeds list length, parent has no children to chck
             return -1
         if right > len(self.queue) or self.queue[left] < self.queue[right]:  # if right exceeds list length, or if left
-            # is less than right
+        # is less than right
             return left
         else:
             return right
-
-
 
     def pop(self):
         min = self.queue[0]  # save 0th object

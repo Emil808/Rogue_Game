@@ -8,3 +8,5 @@ class Test_auxillary_function(object):
         print("Starting Tests for Auxillary Functions")
 
     # todo: test insert and pop
+    def test(self):
+        print("Test") 
